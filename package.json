@@ -1,20 +1,29 @@
 {
-  "name": "resin-universal-ga",
+  "name": "balena-universal-ga",
   "version": "1.3.0",
   "description": "A CommonJS wrapper for both Node.js and browser (async) version of Google Analytics library",
-  "main": "src/node.js",
-  "browser": "src/browser.js",
-  "scripts": {},
+  "main": "build/node.js",
+  "browser": "build/browser.js",
+  "scripts": {
+    "lint": "balena-lint -e js -e ts --typescript src/browser.js src/ga-loader.d.ts src/node.js",
+    "lint-fix": "balena-lint -e js -e ts --typescript --fix src/browser.js src/ga-loader.d.ts src/node.js",
+    "test": "npm run lint",
+    "prepare": "tsc"
+  },
   "keywords": [],
-  "author": "Eugene Mirotin <eugene@resin.io>",
   "license": "Apache-2.0",
   "dependencies": {
-    "bluebird": "^3.4.7",
-    "universal-analytics": "^0.4.8"
+    "universal-analytics": "^0.4.23"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:balena-io-modules/resin-universal-ga.git"
+    "url": "git@github.com:balena-io-modules/balena-universal-ga.git"
   },
-  "homepage": "https://github.com/balena-io-modules/resin-universal-ga"
+  "homepage": "https://github.com/balena-io-modules/balena-universal-ga",
+  "devDependencies": {
+    "@balena/lint": "^5.1.0",
+    "@types/google.analytics": "0.0.40",
+    "@types/universal-analytics": "^0.4.4",
+    "typescript": "^3.9.6"
+  }
 }
