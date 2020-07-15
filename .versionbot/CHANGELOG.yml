@@ -1,9 +1,47 @@
+- commits:
+    - subject: Add .versionbot/CHANGELOG.yml for nested changelogs
+      hash: 8d8428a5d83d5a757dc52c2ff17c9289d89a1b0a
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+    - subject: Switch to native promises
+      hash: d03a9ec6f4c17cb625f062e892f76e8be702d973
+      body: ''
+      footer:
+        Change-type: major
+        change-type: major
+      author: Pagan Gazzard
+    - subject: Add linting
+      hash: e7b1a5001f3421024d17782b44d09a21005e43a0
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+    - subject: Add type checking
+      hash: 715e1f3a85c00f48a7139cf78cf18ab2a9a631b3
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+    - subject: Rename to balena
+      hash: ae7a154d8062b089f8360b2df8bc8b57fdbf88a7
+      body: ''
+      footer:
+        Change-type: major
+        change-type: major
+      author: Pagan Gazzard
+  version: 2.0.0
+  date: 2020-07-15T16:43:16.261Z
 - version: 1.3.0
-  date: "2019-04-10T10:47:44Z"
+  date: '2019-04-10T10:47:44Z'
   commits:
-  - hash: 740c22954862da110101ce19210b87fa2ab6cd95
-    author: Dimitrios Lytras
-    footers:
-      change-type: minor
-    subject: Move the package to a dedicated repo
-    body: ""
+    - hash: 740c22954862da110101ce19210b87fa2ab6cd95
+      author: Dimitrios Lytras
+      footers:
+        change-type: minor
+      subject: Move the package to a dedicated repo
+      body: ''
