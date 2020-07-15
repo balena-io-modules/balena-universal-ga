@@ -5,6 +5,9 @@
   "main": "build/node.js",
   "browser": "build/browser.js",
   "scripts": {
+    "lint": "balena-lint -e js -e ts --typescript src/browser.js src/ga-loader.d.ts src/node.js",
+    "lint-fix": "balena-lint -e js -e ts --typescript --fix src/browser.js src/ga-loader.d.ts src/node.js",
+    "test": "npm run lint",
     "prepare": "tsc"
   },
   "keywords": [],
@@ -19,6 +22,7 @@
   },
   "homepage": "https://github.com/balena-io-modules/balena-universal-ga",
   "devDependencies": {
+    "@balena/lint": "^5.1.0",
     "@types/google.analytics": "0.0.40",
     "@types/universal-analytics": "^0.4.4",
     "typescript": "^3.9.6"

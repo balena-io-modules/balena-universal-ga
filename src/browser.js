@@ -1,67 +1,76 @@
 if (window.ga === undefined) {
-	require('./ga-loader')
+	require('./ga-loader');
 }
 
-const Promise = require('bluebird')
-const TRACKER_NAME = 'resinAnalytics'
+const Promise = require('bluebird');
+const TRACKER_NAME = 'resinAnalytics';
 
 module.exports = function (propertyId, site, debug) {
-	let booted = false
+	let booted = false;
 
 	return {
-		boot: function() {
-			if (booted) return
-			const options = {}
+		boot: function () {
+			if (booted) {
+				return;
+			}
+			const options = {};
 
 			if (debug) {
-				options.cookieDomain = 'none'
+				options.cookieDomain = 'none';
 			}
 
-			window.ga('create', propertyId, site, TRACKER_NAME, options)
-			booted = true
+			window.ga('create', propertyId, site, TRACKER_NAME, options);
+			booted = true;
 		},
 		anonLogin: function () {
-			this.boot()
+			this.boot();
 		},
 		login: function (userId) {
-			this.boot()
-			window.ga(TRACKER_NAME + '.set', 'userId', userId)
+			this.boot();
+			window.ga(TRACKER_NAME + '.set', 'userId', userId);
 		},
 		logout: function () {
 			return Promise.fromCallback(function (callback) {
-				window.ga(function() {
+				window.ga(function () {
 					if (booted) {
-						window.ga.remove(TRACKER_NAME)
-						booted = false
+						window.ga.remove(TRACKER_NAME);
+						booted = false;
 					}
-					callback()
-				})
-			})
+					callback();
+				});
+			});
 		},
 		track: function (category, action, label, data) {
-			this.boot()
+			this.boot();
 			return Promise.fromCallback(function (callback) {
 				const options = {
-					hitCallback: callback
-				}
+					hitCallback: callback,
+				};
 				if (debug) {
-					options.transport = 'xhr'
+					options.transport = 'xhr';
 				}
 
 				if (action === 'Page Visit') {
-					window.ga(TRACKER_NAME + '.set', 'page', data.url || window.location.pathname)
-					window.ga(TRACKER_NAME + '.send', 'pageview', data)
+					window.ga(
+						TRACKER_NAME + '.set',
+						'page',
+						data.url || window.location.pathname,
+					);
+					window.ga(TRACKER_NAME + '.send', 'pageview', data);
 					// the hitCallback option isn't fired when calling hitType `pageview`
 					// so we manually call callback()
-					callback()
+					callback();
 				} else {
 					window.ga(
-						TRACKER_NAME + '.send', 'event',
-						category, action, label,
-						options
-					)
+						TRACKER_NAME + '.send',
+						'event',
+						category,
+						action,
+						label,
+						options,
+					);
 				}
-			}).timeout(1000)
-		}
-	}
-}
+			}).timeout(1000);
+		},
+	};
+};

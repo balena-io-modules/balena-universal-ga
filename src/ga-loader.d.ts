@@ -2,6 +2,6 @@ export {};
 
 declare global {
 	interface Window {
-		ga: UniversalAnalytics.ga
+		ga: UniversalAnalytics.ga;
 	}
 }
