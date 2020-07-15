@@ -33,7 +33,7 @@ module.exports = function (propertyId, _site, debug) {
 			return new Promise(function (resolve, reject) {
 				ga.event(category, action, label, undefined, (err, result) => {
 					if (err) {
-						return reject(err)
+						return reject(err);
 					}
 					resolve(result);
 				});
