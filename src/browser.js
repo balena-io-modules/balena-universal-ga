@@ -1,5 +1,5 @@
 if (window.ga === undefined) {
-	require('./ga-loader');
+	require('../vendor/ga-loader');
 }
 
 const TRACKER_NAME = 'resinAnalytics';
@@ -70,9 +70,9 @@ module.exports = function (propertyId, site, debug) {
 						options,
 					);
 				}
-				timeout = setTimeout(() => reject(new Error('Timed out')), 1000)
+				timeout = setTimeout(() => reject(new Error('Timed out')), 1000);
 			}).then(() => {
-				clearTimeout(timeout)
+				clearTimeout(timeout);
 			});
 		},
 	};
