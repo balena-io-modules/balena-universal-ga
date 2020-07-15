@@ -1,4 +1,3 @@
-const Promise = require('bluebird');
 const ua = require('universal-analytics');
 
 module.exports = function (propertyId, _site, debug) {
@@ -31,8 +30,13 @@ module.exports = function (propertyId, _site, debug) {
 		track: function (category, action, label) {
 			// if called before `login` create the object with the random ID
 			this.boot();
-			return Promise.fromCallback(function (callback) {
-				ga.event(category, action, label, undefined, callback);
+			return new Promise(function (resolve, reject) {
+				ga.event(category, action, label, undefined, (err, result) => {
+					if (err) {
+						return reject(err)
+					}
+					resolve(result);
+				});
 			});
 		},
 	};

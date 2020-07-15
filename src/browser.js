@@ -2,7 +2,6 @@ if (window.ga === undefined) {
 	require('./ga-loader');
 }
 
-const Promise = require('bluebird');
 const TRACKER_NAME = 'resinAnalytics';
 
 module.exports = function (propertyId, site, debug) {
@@ -30,21 +29,22 @@ module.exports = function (propertyId, site, debug) {
 			window.ga(TRACKER_NAME + '.set', 'userId', userId);
 		},
 		logout: function () {
-			return Promise.fromCallback(function (callback) {
+			return new Promise(function (resolve) {
 				window.ga(function () {
 					if (booted) {
 						window.ga.remove(TRACKER_NAME);
 						booted = false;
 					}
-					callback();
+					resolve();
 				});
 			});
 		},
 		track: function (category, action, label, data) {
 			this.boot();
-			return Promise.fromCallback(function (callback) {
+			let timeout;
+			return new Promise(function (resolve, reject) {
 				const options = {
-					hitCallback: callback,
+					hitCallback: resolve,
 				};
 				if (debug) {
 					options.transport = 'xhr';
@@ -59,7 +59,7 @@ module.exports = function (propertyId, site, debug) {
 					window.ga(TRACKER_NAME + '.send', 'pageview', data);
 					// the hitCallback option isn't fired when calling hitType `pageview`
 					// so we manually call callback()
-					callback();
+					resolve();
 				} else {
 					window.ga(
 						TRACKER_NAME + '.send',
@@ -70,7 +70,10 @@ module.exports = function (propertyId, site, debug) {
 						options,
 					);
 				}
-			}).timeout(1000);
+				timeout = setTimeout(() => reject(new Error('Timed out')), 1000)
+			}).then(() => {
+				clearTimeout(timeout)
+			});
 		},
 	};
 };
