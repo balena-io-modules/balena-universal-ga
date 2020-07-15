@@ -1,4 +1,14 @@
 - commits:
+    - subject: Fix ga-loader inclusion
+      hash: c2e664c50af611544ee72477ef97254d7407da92
+      body: ''
+      footer:
+        Change-type: patch
+        change-type: patch
+      author: Pagan Gazzard
+  version: 2.0.1
+  date: 2020-07-15T19:33:13.269Z
+- commits:
     - subject: Add .versionbot/CHANGELOG.yml for nested changelogs
       hash: 8d8428a5d83d5a757dc52c2ff17c9289d89a1b0a
       body: ''
