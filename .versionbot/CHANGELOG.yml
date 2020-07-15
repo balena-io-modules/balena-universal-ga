@@ -1,0 +1,9 @@
+- version: 1.3.0
+  date: "2019-04-10T10:47:44Z"
+  commits:
+  - hash: 740c22954862da110101ce19210b87fa2ab6cd95
+    author: Dimitrios Lytras
+    footers:
+      change-type: minor
+    subject: Move the package to a dedicated repo
+    body: ""
