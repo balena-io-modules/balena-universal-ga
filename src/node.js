@@ -1,8 +1,8 @@
-var Promise = require('bluebird')
-var ua = require('universal-analytics')
+const Promise = require('bluebird')
+const ua = require('universal-analytics')
 
-module.exports = function(propertyId, site, debug) {
-	var ga = null
+module.exports = function(propertyId, _site, debug) {
+	let ga = null
 
 	return {
 		boot: function() {
@@ -16,7 +16,7 @@ module.exports = function(propertyId, site, debug) {
 				ga = ga.debug()
 			}
 		},
-		anonLogin: function(userId) {
+		anonLogin: function() {
 			this.boot()
 		},
 		login: function(userId) {

@@ -2,16 +2,16 @@ if (window.ga === undefined) {
 	require('./ga-loader')
 }
 
-var Promise = require('bluebird')
-var TRACKER_NAME = 'resinAnalytics'
+const Promise = require('bluebird')
+const TRACKER_NAME = 'resinAnalytics'
 
 module.exports = function (propertyId, site, debug) {
-	var booted = false
+	let booted = false
 
 	return {
 		boot: function() {
 			if (booted) return
-			var options = {}
+			const options = {}
 
 			if (debug) {
 				options.cookieDomain = 'none'
@@ -41,7 +41,7 @@ module.exports = function (propertyId, site, debug) {
 		track: function (category, action, label, data) {
 			this.boot()
 			return Promise.fromCallback(function (callback) {
-				var options = {
+				const options = {
 					hitCallback: callback
 				}
 				if (debug) {
